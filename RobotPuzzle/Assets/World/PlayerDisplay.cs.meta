@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8b3dfc4c307a9424db3822c9b0721461
+timeCreated: 1481837435
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - frame1: {fileID: 21300000, guid: d856a4ca101d89b499f53ffe6d5a72ea, type: 3}
+  - frame2: {fileID: 21300000, guid: 1efb924faf002b148b0b8a358a144654, type: 3}
+  - frame3: {fileID: 21300000, guid: e027fff9d877328468724d7f94d616c0, type: 3}
+  - frame4: {fileID: 21300000, guid: 192c7cb4f70c53949a931c2c2ab6c576, type: 3}
+  - playerx: {instanceID: 0}
+  - spriteR: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

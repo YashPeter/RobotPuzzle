@@ -28,7 +28,7 @@ public class Player{
 		this.posy = posy;
 		direction = 0;
 		frame = 1;
-		this.framelimit = frame;
+		this.framelimit = framelimit;
         this.upf = upf;
         this.upp = upp;
         this.pt = pt;
@@ -68,17 +68,17 @@ public class Player{
 		return posy;
 	}
 
-	public float getdirection(){
+	public int getdirection(){
 		return direction;
 	}
 
-	public float getframe(){
+	public int getframe(){
 		return frame;
 	}
 
 	public void iniciate(){
 		upf(pt - 1, frame, direction, pt);
-		upp(pt - 1, posx, posy, pt);
+		upp(pt - 1, posx, posy, direction);
 	}
 
     //moves the player depending on their direction//
@@ -105,17 +105,21 @@ public class Player{
 
 	public void updateframe(){
 		if (frame == framelimit) {
+            
 			frame = 1;
+            
             upf(pt- 1, frame, direction, pt);
-            upp(pt - 1, posx, posy, pt);
+            upp(pt - 1, posx, posy, direction);
 		} else {
+            
 			frame += 1;
             upf(pt - 1, frame, direction, pt);
-            upp(pt - 1, posx, posy, pt);
+            upp(pt - 1, posx, posy, direction);
         }
 	}
 
 	public void setdirection(int direction){
 		this.direction = direction;
+        upf(pt - 1, frame, direction, pt);
 	}
 }

@@ -17,6 +17,22 @@ public class WorldData {
 
 	}
 
+    //methods that allow world controller to directly interact with the player movement//
+    public int ReturnPlayerDirection(int xp)
+    {
+        return playables[xp].getdirection();
+    }
+
+    public void SetPlayerDirection(int xp, int xd)
+    {
+        playables[xp].setdirection(xd);
+    }
+
+    public void MovePlayer(int xp)
+    {
+        playables[xp].move();
+    }
+
 
     public void AddPlayer()
     {

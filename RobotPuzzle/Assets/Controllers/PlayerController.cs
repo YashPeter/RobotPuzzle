@@ -33,10 +33,13 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance { get; protected set; }
 
+    public float playerSpeed = 12;
+
     public Action<int, int, int, int> upf;
     public Action<int, float, float, int> upp;
 	GameObject[] playerdisplay;
 	SpriteRenderer[] playersprite;
+    Rigidbody2D[] playermovement;
 
     void Start()
 	{   Debug.Log ("playercontroller started");
@@ -66,14 +69,23 @@ public class PlayerController : MonoBehaviour
 
     public void changeGivenPlayerFrame(int arraypos, int frame, int direction, int currplay)
     {
-		Debug.Log("upf");
+		
 		if (playerdisplay [arraypos] == null) {
 			playerdisplay [arraypos] = new GameObject ();
 			playerdisplay [arraypos].AddComponent<SpriteRenderer> ();
 			playersprite [arraypos] = new SpriteRenderer ();
 			playersprite [arraypos] = playerdisplay [arraypos].GetComponent<SpriteRenderer> ();
-		}
-		switch (frame) {
+            playerdisplay[arraypos].AddComponent<Rigidbody2D>();
+            /**playermovement[arraypos] = playerdisplay [arraypos].GetComponent<Rigidbody2D>();
+             playermovement[arraypos] = playerdisplay[arraypos].GetComponent<Rigidbody2D>();
+      
+            playermovement[arraypos].gravityScale = 0;
+              **/
+            playerdisplay[arraypos].GetComponent<Rigidbody2D>().gravityScale = 0;
+            playerdisplay[arraypos].GetComponent<Rigidbody2D>().velocity = playerSpeed;
+        }
+
+        switch (frame) {
 		case 1:
 			switch (direction) {
 			case 0:
@@ -81,15 +93,15 @@ public class PlayerController : MonoBehaviour
 				break;
 
 			case 1:
-				playersprite [arraypos].sprite = p1r2;
+				playersprite [arraypos].sprite = p1r1;
 				break;
 
 			case 2:
-				playersprite [arraypos].sprite = p1u3;
+				playersprite [arraypos].sprite = p1u1;
 				break;
 
 			case 3:
-				playersprite [arraypos].sprite = p1l4;
+				playersprite [arraypos].sprite = p1l1;
 				break;
 
 			}
@@ -182,10 +194,55 @@ public class PlayerController : MonoBehaviour
 		}
     }
 
-    public void translateGivenPlayerFrame(int arraypos, float x, float y, int currplay)
+    public void translateGivenPlayerFrame(int arraypos, float x, float y, int direction)
     {
-		Debug.Log(y);
-		playerdisplay [arraypos].transform.position = new Vector3 (x, y, 0);
+        Debug.Log("Very important test");
+        
+        switch (direction)
+        {
+            case 0:
+                while (playerdisplay[arraypos].transform.position.y > y)
+                {
+                    playerdisplay[arraypos].GetComponent<Rigidbody2D>().AddForce (Vector3.down * playerSpeed);
+                    Debug.Log(playerdisplay[arraypos].transform.position.x);
+                    Debug.Log(playerdisplay[arraypos].transform.position.y);
+                    
+                }
+                
+                break;
+
+            case 1:
+                while (playerdisplay[arraypos].transform.position.x != x)
+                {
+                    playerdisplay[arraypos].transform.position += Vector3.right * playerSpeed;
+                    Debug.Log(playerdisplay[arraypos].transform.position.x);
+                    Debug.Log(playerdisplay[arraypos].transform.position.y);
+                    break;
+                }
+                break;
+
+            case 2:
+                while (playerdisplay[arraypos].transform.position.y != y)
+                {
+                    playerdisplay[arraypos].transform.position += Vector3.up * playerSpeed;
+                    Debug.Log(playerdisplay[arraypos].transform.position.x);
+                    Debug.Log(playerdisplay[arraypos].transform.position.y);
+                    break;
+                }
+                break;
+
+            case 3:
+                while (playerdisplay[arraypos].transform.position.x != x)
+                {
+                    playerdisplay[arraypos].transform.position += Vector3.left * playerSpeed;
+                    Debug.Log(playerdisplay[arraypos].transform.position.x);
+                    Debug.Log(playerdisplay[arraypos].transform.position.y);
+                    break;
+                }
+                break;
+        }
+       
+		//playerdisplay [arraypos].transform.position = new Vector3 (x, y, 0);
 
     }
 }
